@@ -1,0 +1,29 @@
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml">
+    <mx:Script>
+                <![CDATA[
+        import mx.controls.Label;
+        
+        private function eventAction(actionName:String):void {
+            myMainContentPanel.removeAllChildren();
+            switch(actionName) {
+                case 'books' :
+                    myMainContentPanel.addChild(new FilteredBooks());
+                    break;
+                default:
+                    var label:Label = new Label();
+                    label.text = actionName;
+                    myMainContentPanel.addChild(label);
+            }
+        }
+
+        ]]>
+    </mx:Script>
+    <mx:ApplicationControlBar dock="true">
+        <mx:HBox>
+            <mx:Button label="All Books" click="eventAction('books')"/>
+        </mx:HBox>
+    </mx:ApplicationControlBar>
+
+    <mx:Panel id="myMainContentPanel" title="My Books" status="Welcome" width="90%" height="90%"/>
+
+</mx:Application>
