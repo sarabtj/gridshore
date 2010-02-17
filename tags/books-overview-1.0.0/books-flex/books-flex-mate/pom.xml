@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>books-flex</artifactId>
+        <groupId>nl.gridshore.samples.books</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>nl.gridshore.samples.books</groupId>
+    <artifactId>books-flex-mate</artifactId>
+    <packaging>swf</packaging>
+    <name>books-flex-mate</name>
+    <url>http://www.gridshore.nl</url>
+
+    <dependencies>
+        <!-- internal -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>books-flex-security</artifactId>
+            <version>${project.version}</version>
+            <type>swc</type>
+        </dependency>
+
+        <!-- external -->
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.adobe.flexunit</groupId>
+            <artifactId>flexunit</artifactId>
+            <version>0.85</version>
+            <type>swc</type>
+            <scope>test</scope>
+        </dependency>
+        
+    </dependencies>
+
+    <build>
+        <finalName>books-flex</finalName>
+        <sourceDirectory>src/main/flex</sourceDirectory>
+        <testSourceDirectory>src/test/flex</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flex-mojos.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <debug>true</debug>
+                    <configurationReport>true</configurationReport>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.adobe.flex</groupId>
+                        <artifactId>compiler</artifactId>
+                        <version>${flex.sdk.version}</version>
+                        <type>pom</type>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.adobe.flex.compiler</groupId>
+                        <artifactId>asdoc</artifactId>
+                        <version>${flex.sdk.version}</version>
+                        <classifier>template</classifier>
+                        <type>zip</type>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+        <defaultGoal>install</defaultGoal>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>${basedir}/target/generated-resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>
